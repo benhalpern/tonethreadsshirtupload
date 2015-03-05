@@ -58,6 +58,8 @@ form{
 
 #canvas{
   margin-top:160px;
+  opacity:0.9;
+
 }
 
 .loader{
