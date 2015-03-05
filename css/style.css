@@ -1,0 +1,83 @@
+#container{
+  font-family: 'Muli', sans-serif;
+  width:700px;
+  margin:auto;
+  background:red;
+  height:900px;
+  text-align:center;
+  background: #fff url("../images/tee.jpg");
+  background-repeat: no-repeat;
+  background-position: center 70px;
+}
+
+h1{
+  font-size:40px;
+  margin-top:30px;
+  margin-bottom:0px;
+}
+
+* {
+  outline: none;
+}
+
+form{
+  margin-top:110px;
+  overflow:visible;
+  padding:50px;
+}
+
+#upload-message{
+  margin-bottom:14px;
+  font-size:24px;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: '+';
+  display: inline-block;
+  background: #1abc9c;
+  border-radius: 40px;
+  padding: 50px 80px 80px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 100px;
+  color:white;
+}
+.custom-file-input:hover::before {
+  background:#0DD6AE;
+}
+.custom-file-input:active::before {
+  background: #13E89D;
+}
+
+#canvas{
+  margin-top:160px;
+}
+
+.loader{
+  margin-top:160px;
+  display:none;
+}
+
+#next{
+  background: #1abc9c;
+  font-size:40px;
+  border:0;
+  padding:15px 45px;
+  color:white;
+  border-radius:4px;
+  margin:auto;
+  display:block;
+  display:none;
+  cursor:pointer;
+}
+
+#next:hover{
+  background:#0DD6AE;
+}
