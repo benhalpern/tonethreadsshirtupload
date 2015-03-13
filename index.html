@@ -15,10 +15,16 @@
       <form>
         <div id="upload-message">Upload an Image</div>
         <input type="file" class="custom-file-input" id="fileUpload">
+        <div class="input-holder">
+          <input type="text" class="shirt-name" id="shirtName" placeholder="Design Name">
+          <input type="submit" class="next" id="next" placeholder="Design Name">
+
+        </div>
+        <div>
+        </div>
       </form>
       <div class="loader"><img src='http://forq.ru/i/loadingbig.gif'></div>
-      <canvas id="canvas"  width="290" height="470" style="display:none;cursor:default;"></canvas>
-      <div><button id="next">Next</button></div>
+      <canvas id="canvas"  width="290" height="440" style="display:none;cursor:default;"></canvas>
 
     </div>
 
@@ -31,7 +37,11 @@
 
       function readImage() {
 
-          $("form").hide();
+          draggingImage = false;
+          offsetY = 0;
+          imageY = 0;
+          $("#fileUpload").hide();
+          $('#upload-message').hide();
           $('canvas').show();
           $(".loader").show();
           if ( this.files && this.files[0] ) {
@@ -41,10 +51,23 @@
                  var ratio;
                    img.onload = function() {
                      $(".loader").hide();
-                     $("#next").show();
+                     $(".input-holder").show();
                      var ratio = img.height/img.width
                      console.log(ratio)
                      context.drawImage(img, 0, 0,290,(290*ratio));
+                     $("#canvas").mousedown(function (e) {
+                       handleMouseDown(e);
+                     });
+                     $("#canvas").mousemove(function (e) {
+                         handleMouseMove(e,img,ratio);
+                     });
+                     $("#canvas").mouseup(function (e) {
+                         handleMouseUp(e);
+                     });
+                     $("#canvas").mouseout(function (e) {
+                         handleMouseOut(e);
+                     });
+
                    };
           img.src = e.target.result;
               };
@@ -52,6 +75,58 @@
           }
       }
       el("fileUpload").addEventListener("change", readImage, false);
+
+      function handleMouseDown(e) {
+          startY = parseInt(e.clientY - offsetY);
+          draggingImage = true;
+          e.preventDefault();
+      }
+
+      function handleMouseMove(e,img,ratio) {
+        if (draggingImage){
+          imageClick = false;
+
+          mouseY = parseInt(e.clientY - offsetY);
+
+          // move the image by the amount of the latest drag
+          var dy = mouseY - startY;
+          if(dy < 0){
+            if(imageY > 0){
+              imageY += dy;
+            }
+          }
+          else{
+            if(imageY < 50){
+              imageY += dy;
+            }
+          }
+          // reset the startXY for next time
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(img, 0, imageY,290,(290*ratio));
+
+          startY = mouseY;
+
+          // redraw the image with border
+          console.log("mouse",imageY)
+          console.log("d",dy)
+
+        }
+      }
+
+      function handleMouseUp(e){
+        draggingImage = false;
+      }
+      function handleMouseOut(e){
+        draggingImage = false;
+      }
+
+      $("form").submit(function(e){
+        e.preventDefault();
+        console.log($("#shirtName").val())
+        console.log($("#fileUpload").val())
+        canvas = document.getElementById("canvas");
+        localStorage["dataurl"]=canvas.toDataURL("image/png", 1.0)
+      })
 
     </script>
   </body>

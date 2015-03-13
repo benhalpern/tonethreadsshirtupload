@@ -48,6 +48,28 @@ form{
   font-size:24px;
 }
 
+#shirtName{
+  width:340px;
+  font-size:25px;
+  padding:6px;
+  /*display:none;*/
+  margin-top:30px;
+
+}
+.input-holder{
+  position:absolute;
+  top:660px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width:400px;
+  display:none;
+  background:#303030;
+  height:230px;
+  text-align:center;
+  border-radius:5px;
+}
+
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
 }
@@ -74,9 +96,9 @@ form{
 }
 
 #canvas{
-  margin-top:160px;
-  opacity:0.9;
-
+  margin-top:-60px;
+  opacity:0.7;
+  cursor:pointer;
 }
 
 .loader{
@@ -91,10 +113,11 @@ form{
   padding:15px 45px;
   color:white;
   border-radius:4px;
-  margin:auto;
-  display:block;
-  display:none;
+  /*display:block;*/
+  /*display:none;*/
   cursor:pointer;
+  margin-top:40px;
+  width:300px;
 }
 
 #next:hover{
